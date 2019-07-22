@@ -37,7 +37,7 @@ import {
                         urlProfilePicture: defaultProfilePictureUrl,
                         uid: data.user.uid
                     };
-                    this.context.user(data.user.uid).set(newUser);
+                    this.context.userRoute(data.user.uid).set(newUser);
                 });
                 this.props.history.push('/login');
         }

@@ -17,6 +17,11 @@ class Login extends Component {
         super(props)
 
     }
+    componentDidMount() {
+        if (this.props.location.pathname === '/signout') { 
+            this.handleLogout();
+        }
+    }
 
     handleLogout() {
         this.context.handleLogout()
@@ -28,7 +33,7 @@ class Login extends Component {
 
     render() {
         let comp;
-        if (this.context.isAuth || window.localStorage.getItem('authenticated')) {
+        if (this.context.isAuth && window.localStorage.getItem('authenticated')) {
             comp = <Redirect to={"/"}/>;
         } else  {
             if (this.props.location.pathname === '/login') {

@@ -35,6 +35,8 @@ export class FirebaseProvider extends Component {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
+
+        this.serverValue = firebase.database.ServerValue;
         this.auth = firebase.auth();
         this.db = firebase.database();
         this.state.authListener();
@@ -45,6 +47,27 @@ export class FirebaseProvider extends Component {
         isAuth: false,
         error: '',
         checkAuthenticated: () => {
+        },
+
+        updateUserData : () => {
+            if (this.state.isAuth && this.state.user) {
+                this.state.userRoute(this.state.user.uid)
+                    .once('value')
+                    .then(snapshot => {
+                        const dbUser = snapshot.val();
+                        let user = {
+                            uid: this.state.user.uid,
+                            email: this.state.user.email,
+                            ...dbUser,
+                        };
+                        localStorage.setItem('userData', JSON.stringify(user));
+                        localStorage.setItem('authenticated', true);
+                        this.setState({
+                            user: user,
+                            isAuth: true
+                        });
+                    });
+            }
         },
 
         handleLogin: (email, password) => {
@@ -86,10 +109,13 @@ export class FirebaseProvider extends Component {
         handleLogout: () => {
             return this.auth.signOut();
         },
+        getServerTime : () => {
+            return this.serverValue.TIMESTAMP;
+        },
 
         userRoute: (userId) => this.db.ref(`users/${userId}`),
 
-        tweetRoute: (tweetId) => this.db.ref(`tweets/${tweetId}`),
+        tweetsRoute: () => this.db.ref(`tweets`),
 
 
     }
