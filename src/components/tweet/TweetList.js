@@ -45,7 +45,7 @@ class TweetList extends Component {
     render() {
 
         return (
-            <>
+            <ul>
                 {
                     this.state.tweets.length > 0 && 
 
@@ -53,7 +53,7 @@ class TweetList extends Component {
                         <TweetItem key={tweet.tid} tweet={tweet} firebase={this.context}></TweetItem>
                     ))
                 }
-            </>
+            </ul>
         );
     }
 }

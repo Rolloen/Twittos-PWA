@@ -59,7 +59,7 @@ class UserCard extends Component {
             FollowBtn = <button onClick={this.followUser}>Follow</button>
         }
         return (
-            <div>
+            <div className="user-card">
                 <img src={this.props.tweet.urlProfilePicture} alt="Profile Picture" />
                 <span>
                     {this.props.tweet.username}

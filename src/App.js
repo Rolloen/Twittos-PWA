@@ -3,7 +3,8 @@ import './App.css';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { FirebaseProvider } from './store/FirebaseContext';
-import AuthenticatedRoute from "./AuthenticatedRoute"
+import AuthenticatedRoute from "./AuthenticatedRoute";
+
 
 //import container
 import Login from './container/Login.js';
@@ -17,7 +18,7 @@ import BottomNavigation from './components/navigation/BottomNavigation';
 class App extends React.Component {
 
     render() {
-
+        
         return (
             <div className="App">
                 <Router>

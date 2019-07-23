@@ -116,6 +116,7 @@ export class FirebaseProvider extends Component {
         userRoute: (userId) => this.db.ref(`users/${userId}`),
 
         tweetsRoute: () => this.db.ref(`tweets`),
+        tweetsRouteWithId: (tweetId) => this.db.ref(`tweets/${tweetId}`),
 
 
     }
